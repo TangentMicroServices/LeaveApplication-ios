@@ -7,12 +7,56 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class LeaveFormViewController: UIViewController {
 
+    let api: LeaveServiceAPI = LeaveServiceAPI()
+    
+    @IBOutlet weak var leaveTypeTxt: UITextField!
+    @IBOutlet weak var startDateTxt: UITextField!
+    @IBOutlet weak var endDateTxt: UITextField!
+    
     @IBAction func CloseButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        startDateTxt.text = dateFormatter.stringFromDate(sender.date)
+        
+    }
+
+    
+    @IBAction func initFromDatePicker(sender: UITextField) {
+    
+        let datePickerView:UIDatePicker = UIDatePicker()
+        
+        datePickerView.datePickerMode = UIDatePickerMode.Date
+        
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(LeaveFormViewController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+    
+    }
+    
+    
+    @IBAction func submitLeaveApplication(sender: AnyObject) {
+    
+        let leaveType = leaveTypeTxt.text
+        let startDate = startDateTxt.text
+        let endDate = endDateTxt.text
+        
+        api.createLeaveAplication(leaveType!, startDate: startDate!, endDate: endDate!, callback: {(status: String?, data: JSON?) -> () in
+        
+        })
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -1,0 +1,6 @@
+framework module Pods_LeaveApplication {
+  umbrella header "Pods-LeaveApplication-umbrella.h"
+
+  export *
+  module * { export * }
+}
