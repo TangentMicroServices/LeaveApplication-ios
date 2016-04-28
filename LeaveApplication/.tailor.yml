@@ -1,0 +1,11 @@
+include:
+    - "LeaveApplication/**.swift"
+exclude:
+    - '**Tests.swift'   # Ignore Swift files that end in "Tests"
+    - Source/Carthage   # Ignore Swift files under "Source/Carthage/"
+    - Source/Pods   
+
+except:
+    - parenthesis-whitespace
+    - trailing-whitespace    
+    - terminating-newline
